@@ -12,7 +12,7 @@ export async function appRoutes(app: FastifyInstance) {
 
       const { title, weekDays } = createHabitBody.parse(req.body);
 
-      const today = dayjs().startOf('day').toDate();
+      const today = dayjs().startOf("day").toDate();
       const habit = await prisma.habit.create({
          data: {
             title,
@@ -27,6 +27,45 @@ export async function appRoutes(app: FastifyInstance) {
          },
       });
 
-      res.status(201)
+      res.status(201);
+   });
+
+   app.get("/day", async (req, res) => {
+      const getDayParams = z.object({
+         date: z.coerce.date(),
+      });
+
+      const { date } = getDayParams.parse(req.query);
+
+      const parsedDate = dayjs(date).startOf("day");
+      const weekDay = parsedDate.get("day");
+
+      const possibleHabits = await prisma.habit.findMany({
+         where: {
+            created_at: {
+               lte: date,
+            },
+            weekDays: {
+               some: {
+                  week_day: weekDay,
+               },
+            },
+         },
+      });
+
+      const day = await prisma.day.findUnique({
+         where: {
+            date: parsedDate.toDate(),
+         },
+         include: {
+            dayHabits: true,
+         },
+      });
+
+      const completedHabits = day?.dayHabits.map(
+         (dayHabit) => dayHabit.habit_id
+      );
+
+      res.status(201).send({ possibleHabits, completedHabits });
    });
 }
