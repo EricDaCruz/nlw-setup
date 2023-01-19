@@ -9,6 +9,6 @@ export const DAY_SIZE = (Dimensions.get('screen').width / WEEK_DAYS ) - (SCREN_H
 
 export function HabitDay() {
    return (
-      <TouchableOpacity className="bg-zinc-900 border-2  border-zinc-800 rounded-lg" style={{width: DAY_SIZE, height: DAY_SIZE}}/>
+      <TouchableOpacity activeOpacity={0.7} className="bg-zinc-900 border-2 m-1 border-zinc-800 rounded-lg" style={{width: DAY_SIZE, height: DAY_SIZE}}/>
    );
 }
