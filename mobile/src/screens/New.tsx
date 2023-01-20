@@ -44,7 +44,7 @@ export function New() {
          >
             <BackButton />
             <Text className="mt-6 text-white font-extrabold text-3xl">
-               Cria Hábito
+               Criar Hábito
             </Text>
             <Text className="mt-6 text-white font-semibold text-base">
                Qual seu comprometimento?
@@ -52,7 +52,7 @@ export function New() {
 
             <TextInput
                placeholder="ex.: Exercícios, dormir bem, etc..."
-               className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-green-600"
+               className="h-12 pl-4 rounded-lg mt-3 bg-zinc-900 text-white border-2 border-zinc-800 focus:border-green-600"
                placeholderTextColor={colors.zinc[400]}
             />
 
