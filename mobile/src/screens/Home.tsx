@@ -31,7 +31,7 @@ export function Home() {
 
          <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 100}}
+            contentContainerStyle={{ paddingBottom: 100 }}
          >
             <View className="flex-row flex-wrap">
                {datesFromYearStart.map((date) => {
@@ -39,9 +39,10 @@ export function Home() {
                })}
 
                {amountOfDaysToFill > 0 &&
-                  Array.from({ length: amountOfDaysToFill }).map(() => {
+                  Array.from({ length: amountOfDaysToFill }).map((_, key) => {
                      return (
                         <View
+                           key={key}
                            className="bg-zinc-900 border-2 m-1 border-zinc-800 rounded-lg opacity-40"
                            style={{ width: DAY_SIZE, height: DAY_SIZE }}
                         />
